@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Shuffle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
 
 interface NumberGeneratorProps {
   gameType: "keno" | "loto";
@@ -15,14 +16,22 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   const [seriesSize, setSeriesSize] = useState(6);
   const [numberOfSeries, setNumberOfSeries] = useState(1);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
+  const [drawnNumbers, setDrawnNumbers] = useState<number[]>([]);
   const maxNumber = gameType === "keno" ? 70 : 49;
+  const maxSelectable = gameType === "keno" ? 60 : 35;
 
   const toggleNumber = (num: number) => {
     if (selectedNumbers.includes(num)) {
       setSelectedNumbers(selectedNumbers.filter(n => n !== num));
     } else {
-      if (selectedNumbers.length < maxNumber) {
+      if (selectedNumbers.length < maxSelectable) {
         setSelectedNumbers([...selectedNumbers, num]);
+      } else {
+        toast({
+          title: "Limite atteinte",
+          description: `Vous ne pouvez pas sélectionner plus de ${maxSelectable} numéros en ${gameType === "keno" ? "Keno" : "Loto"}.`,
+          variant: "destructive"
+        });
       }
     }
   };
@@ -57,6 +66,28 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
     toast({
       title: "Séries Générées",
       description: `${numberOfSeries} série${numberOfSeries > 1 ? 's' : ''} de ${seriesSize} numéros générée${numberOfSeries > 1 ? 's' : ''} !`,
+    });
+  };
+
+  const handleDrawnNumbersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numbers = event.target.value.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n) && n > 0 && n <= maxNumber);
+    setDrawnNumbers(numbers);
+  };
+
+  const checkMatches = () => {
+    if (drawnNumbers.length === 0) {
+      toast({
+        title: "Erreur",
+        description: "Veuillez entrer les numéros tirés pour vérifier les correspondances.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const matches = selectedNumbers.filter(num => drawnNumbers.includes(num));
+    toast({
+      title: "Correspondances trouvées",
+      description: `${matches.length} numéro${matches.length > 1 ? 's' : ''} correspondent au tirage : ${matches.join(', ')}`,
     });
   };
 
@@ -113,6 +144,20 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
             <p className="text-center text-sm text-gray-500">
               Sélectionné: {numberOfSeries} série{numberOfSeries > 1 ? "s" : ""}
             </p>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="text-lg font-medium text-center">Vérification des Tirages</h3>
+            <div className="flex gap-2">
+              <Input
+                placeholder="Entrez les numéros tirés (séparés par des virgules)"
+                onChange={handleDrawnNumbersChange}
+                className="flex-1"
+              />
+              <Button onClick={checkMatches} variant="outline">
+                Vérifier
+              </Button>
+            </div>
           </div>
         </div>
 
