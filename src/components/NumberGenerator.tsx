@@ -14,19 +14,41 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   const { toast } = useToast();
   const [seriesSize, setSeriesSize] = useState(6);
   const [numberOfSeries, setNumberOfSeries] = useState(1);
+  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const maxNumber = gameType === "keno" ? 70 : 49;
 
+  const toggleNumber = (num: number) => {
+    if (selectedNumbers.includes(num)) {
+      setSelectedNumbers(selectedNumbers.filter(n => n !== num));
+    } else {
+      if (selectedNumbers.length < maxNumber) {
+        setSelectedNumbers([...selectedNumbers, num]);
+      }
+    }
+  };
+
   const generateNumbers = () => {
+    if (selectedNumbers.length < seriesSize) {
+      toast({
+        title: "Erreur",
+        description: `Veuillez sélectionner au moins ${seriesSize} numéros pour générer les séries.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
     const allSeries: number[][] = [];
     
     for (let i = 0; i < numberOfSeries; i++) {
       const numbers: number[] = [];
+      const availableNumbers = [...selectedNumbers];
+      
       while (numbers.length < seriesSize) {
-        const num = Math.floor(Math.random() * maxNumber) + 1;
-        if (!numbers.includes(num)) {
-          numbers.push(num);
-        }
+        const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+        numbers.push(availableNumbers[randomIndex]);
+        availableNumbers.splice(randomIndex, 1);
       }
+      
       numbers.sort((a, b) => a - b);
       allSeries.push(numbers);
     }
@@ -41,6 +63,19 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   return (
     <Card className="p-6 backdrop-blur-sm bg-white/90 shadow-lg animate-fade-in">
       <div className="space-y-6">
+        <div className="grid grid-cols-10 gap-2">
+          {Array.from({ length: maxNumber }, (_, i) => i + 1).map((num) => (
+            <Button
+              key={num}
+              variant={selectedNumbers.includes(num) ? "default" : "outline"}
+              className="w-8 h-8 p-0 text-sm font-medium"
+              onClick={() => toggleNumber(num)}
+            >
+              {num}
+            </Button>
+          ))}
+        </div>
+
         <div className="space-y-4">
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-center">Taille des Séries</h3>
@@ -84,9 +119,10 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
         <Button
           onClick={generateNumbers}
           className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105"
+          disabled={selectedNumbers.length < seriesSize}
         >
           <Shuffle className="mr-2 h-5 w-5" />
-          Générer les Numéros
+          Générer les Séries Réduites
         </Button>
       </div>
     </Card>
