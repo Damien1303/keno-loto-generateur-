@@ -20,6 +20,17 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   const maxNumber = gameType === "keno" ? 70 : 49;
   const maxSelectable = gameType === "keno" ? 60 : 35;
 
+  const getNumberButtonClass = (num: number) => {
+    if (drawnNumbers.includes(num) && selectedNumbers.includes(num)) {
+      return "bg-green-500 hover:bg-green-600 text-white"; // Match
+    } else if (selectedNumbers.includes(num)) {
+      return "bg-purple-500 hover:bg-purple-600 text-white"; // Selected
+    } else if (drawnNumbers.includes(num)) {
+      return "bg-orange-500 hover:bg-orange-600 text-white"; // Drawn but not selected
+    }
+    return "bg-white hover:bg-purple-100 text-purple-700 border-purple-200"; // Default
+  };
+
   const toggleNumber = (num: number) => {
     if (selectedNumbers.includes(num)) {
       setSelectedNumbers(selectedNumbers.filter(n => n !== num));
@@ -92,14 +103,14 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   };
 
   return (
-    <Card className="p-6 backdrop-blur-sm bg-white/90 shadow-lg animate-fade-in">
+    <Card className="p-6 backdrop-blur-sm bg-white/90 shadow-lg animate-fade-in border-purple-200">
       <div className="space-y-6">
         <div className="grid grid-cols-10 gap-2">
           {Array.from({ length: maxNumber }, (_, i) => i + 1).map((num) => (
             <Button
               key={num}
-              variant={selectedNumbers.includes(num) ? "default" : "outline"}
-              className="w-8 h-8 p-0 text-sm font-medium"
+              variant="outline"
+              className={`w-8 h-8 p-0 text-sm font-medium transition-colors duration-200 ${getNumberButtonClass(num)}`}
               onClick={() => toggleNumber(num)}
             >
               {num}
@@ -109,9 +120,9 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center">Taille des Séries</h3>
+            <h3 className="text-lg font-medium text-center text-purple-800">Taille des Séries</h3>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">1</span>
+              <span className="text-sm text-purple-600">1</span>
               <Slider
                 value={[seriesSize]}
                 onValueChange={(value) => setSeriesSize(value[0])}
@@ -120,17 +131,17 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
                 step={1}
                 className="flex-1"
               />
-              <span className="text-sm text-gray-500">{gameType === "keno" ? "10" : "6"}</span>
+              <span className="text-sm text-purple-600">{gameType === "keno" ? "10" : "6"}</span>
             </div>
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-purple-500">
               Sélectionné: {seriesSize} numéro{seriesSize > 1 ? "s" : ""}
             </p>
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center">Nombre de Séries</h3>
+            <h3 className="text-lg font-medium text-center text-purple-800">Nombre de Séries</h3>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-500">1</span>
+              <span className="text-sm text-purple-600">1</span>
               <Slider
                 value={[numberOfSeries]}
                 onValueChange={(value) => setNumberOfSeries(value[0])}
@@ -139,22 +150,22 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
                 step={1}
                 className="flex-1"
               />
-              <span className="text-sm text-gray-500">10</span>
+              <span className="text-sm text-purple-600">10</span>
             </div>
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-purple-500">
               Sélectionné: {numberOfSeries} série{numberOfSeries > 1 ? "s" : ""}
             </p>
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center">Vérification des Tirages</h3>
+            <h3 className="text-lg font-medium text-center text-purple-800">Vérification des Tirages</h3>
             <div className="flex gap-2">
               <Input
                 placeholder="Entrez les numéros tirés (séparés par des virgules)"
                 onChange={handleDrawnNumbersChange}
-                className="flex-1"
+                className="flex-1 border-purple-200 focus:ring-purple-500"
               />
-              <Button onClick={checkMatches} variant="outline">
+              <Button onClick={checkMatches} variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
                 Vérifier
               </Button>
             </div>
@@ -163,7 +174,7 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
 
         <Button
           onClick={generateNumbers}
-          className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105"
+          className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105 bg-purple-600 hover:bg-purple-700"
           disabled={selectedNumbers.length < seriesSize}
         >
           <Shuffle className="mr-2 h-5 w-5" />
