@@ -19,6 +19,7 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   const [drawnNumbers, setDrawnNumbers] = useState<number[]>([]);
   const maxNumber = gameType === "keno" ? 70 : 49;
   const maxSelectable = gameType === "keno" ? 60 : 35;
+  const maxSeriesSize = gameType === "keno" ? 55 : 40;
 
   const getNumberButtonClass = (num: number) => {
     if (drawnNumbers.includes(num) && selectedNumbers.includes(num)) {
@@ -126,12 +127,12 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
               <Slider
                 value={[seriesSize]}
                 onValueChange={(value) => setSeriesSize(value[0])}
-                max={gameType === "keno" ? 10 : 6}
+                max={maxSeriesSize}
                 min={1}
                 step={1}
                 className="flex-1"
               />
-              <span className="text-sm text-purple-600">{gameType === "keno" ? "10" : "6"}</span>
+              <span className="text-sm text-purple-600">{maxSeriesSize}</span>
             </div>
             <p className="text-center text-sm text-purple-500">
               Sélectionné: {seriesSize} numéro{seriesSize > 1 ? "s" : ""}
