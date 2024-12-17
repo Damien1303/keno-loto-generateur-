@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { Diamond } from "lucide-react";
 
 interface ResultsDisplayProps {
   numbers: number[][];
@@ -17,9 +18,13 @@ export const ResultsDisplay = ({ numbers, drawnNumbers = [] }: ResultsDisplayPro
   return (
     <Card className="p-6 backdrop-blur-sm bg-[#222222]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
       <div className="space-y-6">
-        <h3 className="text-xl font-medium text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
-          Vos Numéros Chance
-        </h3>
+        <div className="flex items-center justify-center gap-2">
+          <Diamond className="w-6 h-6 text-[#9b87f5]" />
+          <h3 className="text-xl font-medium text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
+            Vos Numéros Chance
+          </h3>
+          <Diamond className="w-6 h-6 text-[#9b87f5]" />
+        </div>
         <div className="space-y-6">
           {numbers.map((series, seriesIndex) => (
             <div key={seriesIndex} className="space-y-2">

@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { DollarSign, Target } from "lucide-react";
 
 interface GameSelectorProps {
   selectedGame: "keno" | "loto";
@@ -31,6 +32,7 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
               onClick={() => onSelect("keno")}
             >
               <div className="flex flex-col items-center gap-2">
+                <Target className="w-8 h-8" />
                 <span className="text-xl font-semibold">Keno</span>
                 <span className="text-sm opacity-80">70 numéros</span>
               </div>
@@ -51,6 +53,7 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
               onClick={() => onSelect("loto")}
             >
               <div className="flex flex-col items-center gap-2">
+                <DollarSign className="w-8 h-8" />
                 <span className="text-xl font-semibold">Loto</span>
                 <span className="text-sm opacity-80">49 numéros</span>
               </div>
