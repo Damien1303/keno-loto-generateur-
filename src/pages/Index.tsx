@@ -13,11 +13,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C2A3C] to-[#1A1F2C] py-12 px-4">
       <div className="max-w-2xl mx-auto space-y-8">
-        <div className="text-center space-y-2 animate-fade-in">
-          <h1 className="text-4xl font-bold text-purple-900">Générateur de Numéros Chance</h1>
-          <p className="text-purple-600">Générez vos numéros pour le Keno ou le Loto</p>
+        <div className="text-center space-y-4 animate-fade-in">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
+            Générateur de Numéros Chance
+          </h1>
+          <p className="text-[#9F9EA1] text-lg">
+            Générez vos numéros pour le Keno ou le Loto avec style
+          </p>
         </div>
         <GameSelector selectedGame={selectedGame} onSelect={setSelectedGame} />
         <NumberGenerator 
