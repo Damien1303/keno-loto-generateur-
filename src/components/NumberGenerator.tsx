@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -9,9 +9,10 @@ import { Input } from "@/components/ui/input";
 interface NumberGeneratorProps {
   gameType: "keno" | "loto";
   onGenerate: (numbers: number[][]) => void;
+  onDrawnNumbersChange: (numbers: number[]) => void;
 }
 
-export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) => {
+export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: NumberGeneratorProps) => {
   const { toast } = useToast();
   const [seriesSize, setSeriesSize] = useState(6);
   const [numberOfSeries, setNumberOfSeries] = useState(1);
@@ -20,6 +21,10 @@ export const NumberGenerator = ({ gameType, onGenerate }: NumberGeneratorProps) 
   const maxNumber = gameType === "keno" ? 70 : 49;
   const maxSelectable = gameType === "keno" ? 60 : 35;
   const maxSeriesSize = gameType === "keno" ? 55 : 40;
+
+  useEffect(() => {
+    onDrawnNumbersChange(drawnNumbers);
+  }, [drawnNumbers, onDrawnNumbersChange]);
 
   const getNumberButtonClass = (num: number) => {
     if (drawnNumbers.includes(num) && selectedNumbers.includes(num)) {

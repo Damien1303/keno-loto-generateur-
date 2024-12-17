@@ -6,6 +6,11 @@ import { ResultsDisplay } from "@/components/ResultsDisplay";
 const Index = () => {
   const [selectedGame, setSelectedGame] = useState<"keno" | "loto">("keno");
   const [generatedNumbers, setGeneratedNumbers] = useState<number[][]>([]);
+  const [drawnNumbers, setDrawnNumbers] = useState<number[]>([]);
+
+  const handleDrawnNumbersUpdate = (numbers: number[]) => {
+    setDrawnNumbers(numbers);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 py-12 px-4">
@@ -15,8 +20,17 @@ const Index = () => {
           <p className="text-purple-600">Générez vos numéros pour le Keno ou le Loto</p>
         </div>
         <GameSelector selectedGame={selectedGame} onSelect={setSelectedGame} />
-        <NumberGenerator gameType={selectedGame} onGenerate={setGeneratedNumbers} />
-        {generatedNumbers.length > 0 && <ResultsDisplay numbers={generatedNumbers} />}
+        <NumberGenerator 
+          gameType={selectedGame} 
+          onGenerate={setGeneratedNumbers}
+          onDrawnNumbersChange={handleDrawnNumbersUpdate}
+        />
+        {generatedNumbers.length > 0 && (
+          <ResultsDisplay 
+            numbers={generatedNumbers}
+            drawnNumbers={drawnNumbers}
+          />
+        )}
       </div>
     </div>
   );

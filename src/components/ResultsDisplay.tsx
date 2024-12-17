@@ -3,9 +3,17 @@ import { motion } from "framer-motion";
 
 interface ResultsDisplayProps {
   numbers: number[][];
+  drawnNumbers?: number[];
 }
 
-export const ResultsDisplay = ({ numbers }: ResultsDisplayProps) => {
+export const ResultsDisplay = ({ numbers, drawnNumbers = [] }: ResultsDisplayProps) => {
+  const getNumberClass = (number: number) => {
+    if (drawnNumbers.includes(number)) {
+      return "bg-green-500 text-white border-green-600";
+    }
+    return "bg-purple-100 text-purple-700 border-purple-300";
+  };
+
   return (
     <Card className="p-6 backdrop-blur-sm bg-white/90 shadow-lg animate-fade-in border-purple-200">
       <div className="space-y-6">
@@ -21,7 +29,7 @@ export const ResultsDisplay = ({ numbers }: ResultsDisplayProps) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center font-semibold text-purple-700 border-2 border-purple-300"
+                    className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold border-2 transition-colors duration-300 ${getNumberClass(number)}`}
                   >
                     {number}
                   </motion.div>
