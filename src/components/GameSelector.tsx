@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { DollarSign, Target } from "lucide-react";
+import { DollarSign, Target, Gauge2 } from "lucide-react";
 
 interface GameSelectorProps {
   selectedGame: "keno" | "loto";
@@ -11,11 +11,15 @@ interface GameSelectorProps {
 
 export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
   return (
-    <Card className="p-6 backdrop-blur-sm bg-[#222222]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
+    <Card className="p-6 backdrop-blur-sm bg-[#1A1A1A]/90 shadow-2xl animate-fade-in border-[#333333] rounded-xl">
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
-          Sélectionnez Votre Jeu
-        </h2>
+        <div className="flex items-center justify-center gap-2">
+          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+          <h2 className="text-2xl font-semibold text-center bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text">
+            Sélectionnez Votre Mode
+          </h2>
+          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+        </div>
         <div className="flex gap-4 justify-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -24,10 +28,10 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
             <Button
               variant="outline"
               className={cn(
-                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1F2C]/60",
+                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1A1A]/60",
                 selectedGame === "keno" 
-                  ? "ring-2 ring-[#9b87f5] border-[#9b87f5] text-[#D6BCFA]" 
-                  : "border-[#403E43] text-[#8E9196] hover:border-[#9b87f5] hover:text-[#D6BCFA]"
+                  ? "ring-2 ring-[#FF0000] border-[#FF0000] text-white" 
+                  : "border-[#333333] text-[#8E9196] hover:border-[#FF0000] hover:text-white"
               )}
               onClick={() => onSelect("keno")}
             >
@@ -45,10 +49,10 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
             <Button
               variant="outline"
               className={cn(
-                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1F2C]/60",
+                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1A1A]/60",
                 selectedGame === "loto" 
-                  ? "ring-2 ring-[#9b87f5] border-[#9b87f5] text-[#D6BCFA]" 
-                  : "border-[#403E43] text-[#8E9196] hover:border-[#9b87f5] hover:text-[#D6BCFA]"
+                  ? "ring-2 ring-[#FF0000] border-[#FF0000] text-white" 
+                  : "border-[#333333] text-[#8E9196] hover:border-[#FF0000] hover:text-white"
               )}
               onClick={() => onSelect("loto")}
             >

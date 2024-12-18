@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Diamond } from "lucide-react";
+import { Gauge2 } from "lucide-react";
 
 interface ResultsDisplayProps {
   numbers: number[][];
@@ -12,18 +12,18 @@ export const ResultsDisplay = ({ numbers, drawnNumbers = [] }: ResultsDisplayPro
     if (drawnNumbers.includes(number)) {
       return "bg-green-500/90 text-white border-green-600 shadow-lg shadow-green-500/20";
     }
-    return "bg-[#9b87f5]/90 text-white border-[#7E69AB] shadow-lg shadow-[#9b87f5]/20";
+    return "bg-[#FF0000]/90 text-white border-[#990000] shadow-lg shadow-[#FF0000]/20";
   };
 
   return (
-    <Card className="p-6 backdrop-blur-sm bg-[#222222]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
+    <Card className="p-6 backdrop-blur-sm bg-[#1A1A1A]/90 shadow-2xl animate-fade-in border-[#333333] rounded-xl">
       <div className="space-y-6">
         <div className="flex items-center justify-center gap-2">
-          <Diamond className="w-6 h-6 text-[#9b87f5]" />
-          <h3 className="text-xl font-medium text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
-            Vos Numéros Chance
+          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+          <h3 className="text-xl font-medium text-center bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text">
+            Vos Numéros Performance
           </h3>
-          <Diamond className="w-6 h-6 text-[#9b87f5]" />
+          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
         </div>
         <div className="space-y-6">
           {numbers.map((series, seriesIndex) => (

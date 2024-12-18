@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GameSelector } from "@/components/GameSelector";
 import { NumberGenerator } from "@/components/NumberGenerator";
 import { ResultsDisplay } from "@/components/ResultsDisplay";
-import { Diamond, Trophy, Star } from "lucide-react";
+import { Diamond, Trophy, Star, Gauge } from "lucide-react";
 
 const Index = () => {
   const [selectedGame, setSelectedGame] = useState<"keno" | "loto">("keno");
@@ -14,22 +14,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1A1F2C] via-[#2C2A3C] to-[#1A1F2C] py-12 px-4">
+    <div className="min-h-screen bg-[#222222] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] py-12 px-4">
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="text-center space-y-4 animate-fade-in">
           <div className="flex items-center justify-center gap-4 mb-6">
-            <Diamond className="w-10 h-10 text-[#9b87f5] animate-pulse" />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
-              Générateur de Numéros Chance
+            <Gauge className="w-12 h-12 text-[#FF0000] animate-pulse" />
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text tracking-tighter">
+              Performance Numbers
             </h1>
-            <Diamond className="w-10 h-10 text-[#9b87f5] animate-pulse" />
+            <Gauge className="w-12 h-12 text-[#FF0000] animate-pulse" />
           </div>
           <div className="flex items-center justify-center gap-2">
-            <Trophy className="w-6 h-6 text-[#D6BCFA]" />
-            <p className="text-[#9F9EA1] text-lg">
-              Générez vos numéros pour le Keno ou le Loto avec style
+            <Trophy className="w-6 h-6 text-[#FF0000]" />
+            <p className="text-[#9F9EA1] text-lg font-light tracking-wide">
+              Générez vos numéros avec la précision allemande
             </p>
-            <Star className="w-6 h-6 text-[#D6BCFA]" />
+            <Star className="w-6 h-6 text-[#FF0000]" />
           </div>
         </div>
         <GameSelector selectedGame={selectedGame} onSelect={setSelectedGame} />
