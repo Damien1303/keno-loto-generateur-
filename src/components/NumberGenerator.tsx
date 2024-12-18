@@ -110,93 +110,91 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
 
   return (
     <Card className="p-6 backdrop-blur-sm bg-[#1A1F2C]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
-      <div className="space-y-6">
-        <div className="grid grid-cols-10 gap-2">
-          {Array.from({ length: maxNumber }, (_, i) => i + 1).map((num) => (
-            <Button
-              key={num}
-              variant="outline"
-              className={`w-8 h-8 p-0 text-sm font-medium transition-all duration-300 hover:scale-110 ${getNumberButtonClass(num)}`}
-              onClick={() => toggleNumber(num)}
-            >
-              {num}
-            </Button>
-          ))}
-        </div>
-
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
-              Taille des Séries
-            </h3>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-[#9F9EA1]">1</span>
-              <Slider
-                value={[seriesSize]}
-                onValueChange={(value) => setSeriesSize(value[0])}
-                max={maxSeriesSize}
-                min={1}
-                step={1}
-                className="flex-1"
-              />
-              <span className="text-sm text-[#9F9EA1]">{maxSeriesSize}</span>
-            </div>
-            <p className="text-center text-sm text-[#9F9EA1]">
-              Sélectionné: {seriesSize} numéro{seriesSize > 1 ? "s" : ""}
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
-              Nombre de Séries
-            </h3>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-[#9F9EA1]">1</span>
-              <Slider
-                value={[numberOfSeries]}
-                onValueChange={(value) => setNumberOfSeries(value[0])}
-                max={10}
-                min={1}
-                step={1}
-                className="flex-1"
-              />
-              <span className="text-sm text-[#9F9EA1]">10</span>
-            </div>
-            <p className="text-center text-sm text-[#9F9EA1]">
-              Sélectionné: {numberOfSeries} série{numberOfSeries > 1 ? "s" : ""}
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
-              Vérification des Tirages
-            </h3>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Entrez les numéros tirés (séparés par des virgules)"
-                onChange={handleDrawnNumbersChange}
-                className="flex-1 bg-[#1A1F2C]/60 border-[#403E43] text-[#F1F1F1] placeholder-[#8E9196] focus:ring-[#ea384c] focus:border-[#ea384c]"
-              />
-              <Button 
-                onClick={checkMatches} 
-                variant="outline" 
-                className="border-[#403E43] text-[#F1F1F1] hover:bg-[#ea384c]/20 hover:border-[#ea384c]"
-              >
-                Vérifier
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <Button
-          onClick={generateNumbers}
-          className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#ea384c] to-[#990000] hover:from-[#990000] hover:to-[#ea384c] text-white border-none shadow-lg shadow-[#ea384c]/20"
-          disabled={selectedNumbers.length < seriesSize}
-        >
-          <Shuffle className="mr-2 h-5 w-5" />
-          Générer les Séries Réduites
-        </Button>
+      <div className="grid grid-cols-10 gap-2">
+        {Array.from({ length: maxNumber }, (_, i) => i + 1).map((num) => (
+          <Button
+            key={num}
+            variant="outline"
+            className={`w-8 h-8 p-0 text-sm font-medium transition-all duration-300 hover:scale-110 ${getNumberButtonClass(num)}`}
+            onClick={() => toggleNumber(num)}
+          >
+            {num}
+          </Button>
+        ))}
       </div>
+
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
+            Taille des Séries
+          </h3>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-[#9F9EA1]">1</span>
+            <Slider
+              value={[seriesSize]}
+              onValueChange={(value) => setSeriesSize(value[0])}
+              max={maxSeriesSize}
+              min={1}
+              step={1}
+              className="flex-1"
+            />
+            <span className="text-sm text-[#9F9EA1]">{maxSeriesSize}</span>
+          </div>
+          <p className="text-center text-sm text-[#9F9EA1]">
+            Sélectionné: {seriesSize} numéro{seriesSize > 1 ? "s" : ""}
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
+            Nombre de Séries
+          </h3>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-[#9F9EA1]">1</span>
+            <Slider
+              value={[numberOfSeries]}
+              onValueChange={(value) => setNumberOfSeries(value[0])}
+              max={30}  
+              min={1}
+              step={1}
+              className="flex-1"
+            />
+            <span className="text-sm text-[#9F9EA1]">30</span>
+          </div>
+          <p className="text-center text-sm text-[#9F9EA1]">
+            Sélectionné: {numberOfSeries} série{numberOfSeries > 1 ? "s" : ""}
+          </p>
+        </div>
+
+        <div className="space-y-2">
+          <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
+            Vérification des Tirages
+          </h3>
+          <div className="flex gap-2">
+            <Input
+              placeholder="Entrez les numéros tirés (séparés par des virgules)"
+              onChange={handleDrawnNumbersChange}
+              className="flex-1 bg-[#1A1F2C]/60 border-[#403E43] text-[#F1F1F1] placeholder-[#8E9196] focus:ring-[#ea384c] focus:border-[#ea384c]"
+            />
+            <Button 
+              onClick={checkMatches} 
+              variant="outline" 
+              className="border-[#403E43] text-[#F1F1F1] hover:bg-[#ea384c]/20 hover:border-[#ea384c]"
+            >
+              Vérifier
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <Button
+        onClick={generateNumbers}
+        className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#ea384c] to-[#990000] hover:from-[#990000] hover:to-[#ea384c] text-white border-none shadow-lg shadow-[#ea384c]/20"
+        disabled={selectedNumbers.length < seriesSize}
+      >
+        <Shuffle className="mr-2 h-5 w-5" />
+        Générer les Séries Réduites
+      </Button>
     </Card>
   );
 };
