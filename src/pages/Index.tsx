@@ -20,7 +20,7 @@ const Index = () => {
           <div className="flex items-center justify-center gap-4 mb-6">
             <Gauge className="w-12 h-12 text-[#FF0000] animate-pulse" />
             <h1 className="text-5xl font-bold bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text tracking-tighter">
-              Performance Numbers
+              Keno Loto Générateur
             </h1>
             <Gauge className="w-12 h-12 text-[#FF0000] animate-pulse" />
           </div>
