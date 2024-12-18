@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import { Shuffle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Input } from "@/components/ui/input";
+import { Shuffle } from "lucide-react";
+import { NumberGrid } from "./NumberGrid";
+import { SeriesControls } from "./SeriesControls";
+import { DrawVerification } from "./DrawVerification";
 
 interface NumberGeneratorProps {
   gameType: "keno" | "loto";
@@ -18,6 +19,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
   const [numberOfSeries, setNumberOfSeries] = useState(1);
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const [drawnNumbers, setDrawnNumbers] = useState<number[]>([]);
+  
   const maxNumber = gameType === "keno" ? 70 : 49;
   const maxSelectable = gameType === "keno" ? 60 : 35;
   const maxSeriesSize = gameType === "keno" ? 55 : 40;
@@ -25,17 +27,6 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
   useEffect(() => {
     onDrawnNumbersChange(drawnNumbers);
   }, [drawnNumbers, onDrawnNumbersChange]);
-
-  const getNumberButtonClass = (num: number) => {
-    if (drawnNumbers.includes(num) && selectedNumbers.includes(num)) {
-      return "bg-green-500/90 text-white border-green-600 shadow-lg shadow-green-500/20"; // Match
-    } else if (selectedNumbers.includes(num)) {
-      return "bg-[#ea384c]/90 text-white border-[#990000] shadow-lg shadow-[#ea384c]/20"; // Selected
-    } else if (drawnNumbers.includes(num)) {
-      return "bg-orange-500/90 text-white border-orange-600 shadow-lg shadow-orange-500/20"; // Drawn but not selected
-    }
-    return "bg-[#1A1F2C]/60 hover:bg-[#ea384c]/20 text-[#F1F1F1] border-[#403E43] hover:border-[#ea384c]"; // Default
-  };
 
   const toggleNumber = (num: number) => {
     if (selectedNumbers.includes(num)) {
@@ -51,6 +42,10 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
         });
       }
     }
+  };
+
+  const clearAllNumbers = () => {
+    setSelectedNumbers([]);
   };
 
   const generateNumbers = () => {
@@ -110,81 +105,28 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
 
   return (
     <Card className="p-6 backdrop-blur-sm bg-[#1A1F2C]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
-      <div className="grid grid-cols-10 gap-2">
-        {Array.from({ length: maxNumber }, (_, i) => i + 1).map((num) => (
-          <Button
-            key={num}
-            variant="outline"
-            className={`w-8 h-8 p-0 text-sm font-medium transition-all duration-300 hover:scale-110 ${getNumberButtonClass(num)}`}
-            onClick={() => toggleNumber(num)}
-          >
-            {num}
-          </Button>
-        ))}
-      </div>
+      <NumberGrid
+        maxNumber={maxNumber}
+        selectedNumbers={selectedNumbers}
+        drawnNumbers={drawnNumbers}
+        maxSelectable={maxSelectable}
+        onNumberToggle={toggleNumber}
+        onClearAll={clearAllNumbers}
+      />
 
       <div className="space-y-6 mt-8">
-        <div className="space-y-2">
-          <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
-            Taille des Séries
-          </h3>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-[#9F9EA1]">1</span>
-            <Slider
-              value={[seriesSize]}
-              onValueChange={(value) => setSeriesSize(value[0])}
-              max={maxSeriesSize}
-              min={1}
-              step={1}
-              className="flex-1"
-            />
-            <span className="text-sm text-[#9F9EA1]">{maxSeriesSize}</span>
-          </div>
-          <p className="text-center text-sm text-[#9F9EA1]">
-            Sélectionné: {seriesSize} numéro{seriesSize > 1 ? "s" : ""}
-          </p>
-        </div>
+        <SeriesControls
+          seriesSize={seriesSize}
+          numberOfSeries={numberOfSeries}
+          maxSeriesSize={maxSeriesSize}
+          onSeriesSizeChange={setSeriesSize}
+          onNumberOfSeriesChange={setNumberOfSeries}
+        />
 
-        <div className="space-y-2">
-          <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
-            Nombre de Séries
-          </h3>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-[#9F9EA1]">1</span>
-            <Slider
-              value={[numberOfSeries]}
-              onValueChange={(value) => setNumberOfSeries(value[0])}
-              max={30}
-              min={1}
-              step={1}
-              className="flex-1"
-            />
-            <span className="text-sm text-[#9F9EA1]">30</span>
-          </div>
-          <p className="text-center text-sm text-[#9F9EA1]">
-            Sélectionné: {numberOfSeries} série{numberOfSeries > 1 ? "s" : ""}
-          </p>
-        </div>
-
-        <div className="space-y-2 mt-12 pt-6 border-t border-[#403E43]">
-          <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
-            Vérification des Tirages
-          </h3>
-          <div className="flex gap-2">
-            <Input
-              placeholder="Entrez les numéros tirés (séparés par des virgules)"
-              onChange={handleDrawnNumbersChange}
-              className="flex-1 bg-[#1A1F2C]/60 border-[#403E43] text-[#F1F1F1] placeholder-[#8E9196] focus:ring-[#ea384c] focus:border-[#ea384c]"
-            />
-            <Button 
-              onClick={checkMatches} 
-              variant="outline" 
-              className="border-[#403E43] bg-[#1A1F2C]/60 text-[#F1F1F1] hover:bg-[#ea384c]/20 hover:border-[#ea384c] hover:text-white"
-            >
-              Vérifier
-            </Button>
-          </div>
-        </div>
+        <DrawVerification
+          onDrawnNumbersChange={handleDrawnNumbersChange}
+          onCheckMatches={checkMatches}
+        />
       </div>
 
       <Button
