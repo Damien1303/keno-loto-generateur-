@@ -19,7 +19,7 @@ const Index = () => {
         <div className="text-center space-y-4 animate-fade-in">
           <div className="flex items-center justify-center gap-4 mb-6">
             <Gauge className="w-12 h-12 text-[#FF0000] animate-pulse" />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text tracking-tighter">
+            <h1 className="text-6xl font-bold bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text tracking-tighter">
               Keno Loto Générateur
             </h1>
             <Gauge className="w-12 h-12 text-[#FF0000] animate-pulse" />
