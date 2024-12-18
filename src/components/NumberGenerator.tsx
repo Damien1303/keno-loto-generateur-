@@ -123,7 +123,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
         ))}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6 mt-8">
         <div className="space-y-2">
           <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
             Taille des Séries
@@ -154,7 +154,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
             <Slider
               value={[numberOfSeries]}
               onValueChange={(value) => setNumberOfSeries(value[0])}
-              max={30}  
+              max={30}
               min={1}
               step={1}
               className="flex-1"
@@ -166,7 +166,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
           </p>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 mt-12 pt-6 border-t border-[#403E43]">
           <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
             Vérification des Tirages
           </h3>
@@ -179,7 +179,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
             <Button 
               onClick={checkMatches} 
               variant="outline" 
-              className="border-[#403E43] text-[#F1F1F1] hover:bg-[#ea384c]/20 hover:border-[#ea384c]"
+              className="border-[#403E43] bg-[#1A1F2C]/60 text-[#F1F1F1] hover:bg-[#ea384c]/20 hover:border-[#ea384c] hover:text-white"
             >
               Vérifier
             </Button>
@@ -189,7 +189,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
 
       <Button
         onClick={generateNumbers}
-        className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#ea384c] to-[#990000] hover:from-[#990000] hover:to-[#ea384c] text-white border-none shadow-lg shadow-[#ea384c]/20"
+        className="w-full h-12 mt-8 text-lg font-medium transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#ea384c] to-[#990000] hover:from-[#990000] hover:to-[#ea384c] text-white border-none shadow-lg shadow-[#ea384c]/20"
         disabled={selectedNumbers.length < seriesSize}
       >
         <Shuffle className="mr-2 h-5 w-5" />
