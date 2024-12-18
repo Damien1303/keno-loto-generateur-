@@ -30,11 +30,11 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
     if (drawnNumbers.includes(num) && selectedNumbers.includes(num)) {
       return "bg-green-500/90 text-white border-green-600 shadow-lg shadow-green-500/20"; // Match
     } else if (selectedNumbers.includes(num)) {
-      return "bg-[#9b87f5]/90 text-white border-[#7E69AB] shadow-lg shadow-[#9b87f5]/20"; // Selected
+      return "bg-[#ea384c]/90 text-white border-[#990000] shadow-lg shadow-[#ea384c]/20"; // Selected
     } else if (drawnNumbers.includes(num)) {
       return "bg-orange-500/90 text-white border-orange-600 shadow-lg shadow-orange-500/20"; // Drawn but not selected
     }
-    return "bg-[#1A1F2C]/60 hover:bg-[#9b87f5]/20 text-[#D6BCFA] border-[#403E43] hover:border-[#9b87f5]"; // Default
+    return "bg-[#1A1F2C]/60 hover:bg-[#ea384c]/20 text-[#F1F1F1] border-[#403E43] hover:border-[#ea384c]"; // Default
   };
 
   const toggleNumber = (num: number) => {
@@ -109,7 +109,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
   };
 
   return (
-    <Card className="p-6 backdrop-blur-sm bg-[#222222]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
+    <Card className="p-6 backdrop-blur-sm bg-[#1A1F2C]/80 shadow-xl animate-fade-in border-[#403E43] rounded-xl">
       <div className="space-y-6">
         <div className="grid grid-cols-10 gap-2">
           {Array.from({ length: maxNumber }, (_, i) => i + 1).map((num) => (
@@ -126,7 +126,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
+            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
               Taille des Séries
             </h3>
             <div className="flex items-center gap-4">
@@ -147,7 +147,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
+            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
               Nombre de Séries
             </h3>
             <div className="flex items-center gap-4">
@@ -168,19 +168,19 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#D6BCFA] via-[#9b87f5] to-[#D6BCFA] text-transparent bg-clip-text">
+            <h3 className="text-lg font-medium text-center bg-gradient-to-r from-[#F1F1F1] via-[#ea384c] to-[#F1F1F1] text-transparent bg-clip-text">
               Vérification des Tirages
             </h3>
             <div className="flex gap-2">
               <Input
                 placeholder="Entrez les numéros tirés (séparés par des virgules)"
                 onChange={handleDrawnNumbersChange}
-                className="flex-1 bg-[#1A1F2C]/60 border-[#403E43] text-[#D6BCFA] placeholder-[#8E9196] focus:ring-[#9b87f5] focus:border-[#9b87f5]"
+                className="flex-1 bg-[#1A1F2C]/60 border-[#403E43] text-[#F1F1F1] placeholder-[#8E9196] focus:ring-[#ea384c] focus:border-[#ea384c]"
               />
               <Button 
                 onClick={checkMatches} 
                 variant="outline" 
-                className="border-[#403E43] text-[#D6BCFA] hover:bg-[#9b87f5]/20 hover:border-[#9b87f5]"
+                className="border-[#403E43] text-[#F1F1F1] hover:bg-[#ea384c]/20 hover:border-[#ea384c]"
               >
                 Vérifier
               </Button>
@@ -190,7 +190,7 @@ export const NumberGenerator = ({ gameType, onGenerate, onDrawnNumbersChange }: 
 
         <Button
           onClick={generateNumbers}
-          className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#7E69AB] hover:to-[#9b87f5] text-white border-none shadow-lg shadow-[#9b87f5]/20"
+          className="w-full h-12 text-lg font-medium transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#ea384c] to-[#990000] hover:from-[#990000] hover:to-[#ea384c] text-white border-none shadow-lg shadow-[#ea384c]/20"
           disabled={selectedNumbers.length < seriesSize}
         >
           <Shuffle className="mr-2 h-5 w-5" />

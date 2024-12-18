@@ -11,14 +11,14 @@ interface GameSelectorProps {
 
 export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
   return (
-    <Card className="p-6 backdrop-blur-sm bg-[#1A1A1A]/90 shadow-2xl animate-fade-in border-[#333333] rounded-xl">
+    <Card className="p-6 backdrop-blur-sm bg-[#1A1F2C]/90 shadow-2xl animate-fade-in border-[#333333] rounded-xl">
       <div className="space-y-4">
         <div className="flex items-center justify-center gap-2">
-          <Gauge className="w-6 h-6 text-[#FF0000]" />
-          <h2 className="text-2xl font-semibold text-center bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text">
+          <Gauge className="w-6 h-6 text-[#ea384c]" />
+          <h2 className="text-2xl font-semibold text-center bg-gradient-to-r from-[#FFFFFF] via-[#ea384c] to-[#FFFFFF] text-transparent bg-clip-text">
             Sélectionnez Votre Mode
           </h2>
-          <Gauge className="w-6 h-6 text-[#FF0000]" />
+          <Gauge className="w-6 h-6 text-[#ea384c]" />
         </div>
         <div className="flex gap-4 justify-center">
           <motion.div
@@ -28,10 +28,10 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
             <Button
               variant="outline"
               className={cn(
-                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1A1A]/60",
+                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1F2C]/60",
                 selectedGame === "keno" 
-                  ? "ring-2 ring-[#FF0000] border-[#FF0000] text-white" 
-                  : "border-[#333333] text-[#8E9196] hover:border-[#FF0000] hover:text-white"
+                  ? "ring-2 ring-[#ea384c] border-[#ea384c] text-white" 
+                  : "border-[#333333] text-[#8E9196] hover:border-[#ea384c] hover:text-white"
               )}
               onClick={() => onSelect("keno")}
             >
@@ -49,10 +49,10 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
             <Button
               variant="outline"
               className={cn(
-                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1A1A]/60",
+                "w-32 h-32 rounded-2xl transition-all duration-300 border-2 bg-[#1A1F2C]/60",
                 selectedGame === "loto" 
-                  ? "ring-2 ring-[#FF0000] border-[#FF0000] text-white" 
-                  : "border-[#333333] text-[#8E9196] hover:border-[#FF0000] hover:text-white"
+                  ? "ring-2 ring-[#ea384c] border-[#ea384c] text-white" 
+                  : "border-[#333333] text-[#8E9196] hover:border-[#ea384c] hover:text-white"
               )}
               onClick={() => onSelect("loto")}
             >
