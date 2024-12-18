@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { DollarSign, Target, Gauge2 } from "lucide-react";
+import { DollarSign, Target, Gauge } from "lucide-react";
 
 interface GameSelectorProps {
   selectedGame: "keno" | "loto";
@@ -14,11 +14,11 @@ export const GameSelector = ({ selectedGame, onSelect }: GameSelectorProps) => {
     <Card className="p-6 backdrop-blur-sm bg-[#1A1A1A]/90 shadow-2xl animate-fade-in border-[#333333] rounded-xl">
       <div className="space-y-4">
         <div className="flex items-center justify-center gap-2">
-          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+          <Gauge className="w-6 h-6 text-[#FF0000]" />
           <h2 className="text-2xl font-semibold text-center bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text">
             Sélectionnez Votre Mode
           </h2>
-          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+          <Gauge className="w-6 h-6 text-[#FF0000]" />
         </div>
         <div className="flex gap-4 justify-center">
           <motion.div

@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Gauge2 } from "lucide-react";
+import { Gauge } from "lucide-react";
 
 interface ResultsDisplayProps {
   numbers: number[][];
@@ -19,11 +19,11 @@ export const ResultsDisplay = ({ numbers, drawnNumbers = [] }: ResultsDisplayPro
     <Card className="p-6 backdrop-blur-sm bg-[#1A1A1A]/90 shadow-2xl animate-fade-in border-[#333333] rounded-xl">
       <div className="space-y-6">
         <div className="flex items-center justify-center gap-2">
-          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+          <Gauge className="w-6 h-6 text-[#FF0000]" />
           <h3 className="text-xl font-medium text-center bg-gradient-to-r from-[#FFFFFF] via-[#FF0000] to-[#FFFFFF] text-transparent bg-clip-text">
             Vos Numéros Performance
           </h3>
-          <Gauge2 className="w-6 h-6 text-[#FF0000]" />
+          <Gauge className="w-6 h-6 text-[#FF0000]" />
         </div>
         <div className="space-y-6">
           {numbers.map((series, seriesIndex) => (
